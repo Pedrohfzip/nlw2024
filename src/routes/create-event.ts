@@ -1,26 +1,6 @@
-import fastify from "fastify";
-import {
-  serializerCompiler,
-  validatorCompiler,
-  ZodTypeProvider,
-} from "fastify-type-provider-zod";
-import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
-import { generateString } from "./utils/generate-slug";
-const app = fastify();
-
-app.setValidatorCompiler(validatorCompiler);
-app.setSerializerCompiler(serializerCompiler);
-
-const prisma = new PrismaClient({
-  log: ["query"],
-});
-
-//Erro 200 sucesso
-//erro 300 Redirecionamento
-//Erro 400 erro informação enviada por cliente que chamou a api
-//erro 500 erro servidor, independente do que esta sendo enviado para os servidor
-
+import { ZodTypeProvider } from "fastify-type-provider-zod";
+import { generateString } from "../utils/generate-slug";
 app.withTypeProvider<ZodTypeProvider>().post(
   "/events",
   {
@@ -61,10 +41,3 @@ app.withTypeProvider<ZodTypeProvider>().post(
     return res.status(201).send({ ebentId: event.id, title: event.title });
   }
 );
-
-app
-  .listen({ port: 3333 })
-  .then(() => {
-    console.log("Conectado");
-  })
-  .catch(() => {});

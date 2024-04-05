@@ -2,7 +2,18 @@ POST http://localhost:3333/events
 Content-Type: application/json
 
 {
-    "title": "Titulo novo",
+    "title": "Titulo novo 5",
     "details": "Um evento para quem gosta de programar",
-    "maximumAttendees": 100
+    "maximumAttendees": 1
+}
+
+
+###
+
+POST http://localhost:3333/events/5bb414f9-d3b4-45d7-99c9-39ef62f5d532/attendees
+Content-Type: application/json
+
+{
+    "name": "Pedro Fagundes",
+    "email": "pedro5@gmail.com.br"
 }
